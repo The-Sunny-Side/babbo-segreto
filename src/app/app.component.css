@@ -1,0 +1,18 @@
+.toolbar {
+    background-color: red !important;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.form {
+    text-align: center;
+}
+
+img {
+    height: 4em;
+}
+
+p {
+    font-weight: bolder;
+}
