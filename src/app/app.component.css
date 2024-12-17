@@ -9,10 +9,11 @@
     text-align: center;
 }
 
-img {
-    height: 4em;
-}
+
 
 p {
     font-weight: bolder;
+}
+.image_size{
+    width: 50%;
 }
