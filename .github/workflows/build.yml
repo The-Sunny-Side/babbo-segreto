@@ -34,7 +34,9 @@ jobs:
 
       # 6. Creazione del file regali.json dai secrets
       - name: Create regali.json file
-        run: echo '${{ secrets.REGALI_JSON }}' > src/assets/_files/regali.json
+        run: |
+          mkdir -p src/assets/_files
+          echo '${{ secrets.REGALI_JSON }}' > src/assets/_files/regali.json
 
       # 7. Build del progetto
       - name: Build the project
