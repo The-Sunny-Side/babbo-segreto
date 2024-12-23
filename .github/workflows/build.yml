@@ -36,33 +36,28 @@ jobs:
       - name: Build the project
         run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
-      # 7) Configurazione di Git
+      # 7) Correggi i percorsi relativi (se necessario)
+      - name: Fix relative paths in index.html
+        run: |
+          sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/browser/index.html
+          sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/browser/index.html
+
+      # 8) Configurazione di Git
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # 8) Deploy manuale su GitHub Pages
+      # 9) Deploy manuale su GitHub Pages
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Spostiamoci nella cartella di output
           cd dist/browser
-
-          # Inizializza un nuovo repo in dist/browser
           git init
-
-          # Aggiungi il remote usando il token
           git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
-
-          # Crea (o switcha a) il branch gh-pages
           git checkout -b gh-pages
-
-          # (Opzionale ma consigliato) Disabilita Jekyll
           echo '' > .nojekyll
-
-          # Aggiungi tutto, commit e push con --force
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push --force origin gh-pages
