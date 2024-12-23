@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClientModule
-import { decode as atob } from 'js-base64';
 
 
 type Regali = {
