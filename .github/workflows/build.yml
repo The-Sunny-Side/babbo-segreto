@@ -30,16 +30,20 @@ jobs:
       - name: Build the project
         run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
-      - name: Check build output
-        run: ls -R dist/browser
+      - name: Debug Build Directory
+        run: |
+          echo "Contents of dist/browser:"
+          ls -la dist/browser
 
       - name: Fix relative paths in index.html
         run: |
           if [ -f dist/browser/index.html ]; then
+            echo "Found index.html. Fixing paths..."
             sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/browser/index.html
             sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/browser/index.html
           else
-            echo "index.html not found!"
+            echo "Error: index.html not found in dist/browser."
+            ls -la dist/browser
             exit 1
           fi
 
