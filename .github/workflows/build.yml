@@ -10,40 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout del codice
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Setup di Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # 3. Installazione delle dipendenze
       - name: Install dependencies
         run: npm install
 
-      # 4. Installazione di Angular CLI
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      # 5. Installazione di angular-cli-ghpages
       - name: Install ghpages
         run: npm install -g angular-cli-ghpages
 
-      # 6. Creazione del file regali.json dai secrets
       - name: Create regali.json file
         run: |
           mkdir -p src/assets/_files
           echo '${{ secrets.REGALI_JSON }}' > src/assets/_files/regali.json
 
-      # 7. Build del progetto
       - name: Build the project
         run: ng build --configuration production --base-href /babbo-segreto/
 
-      # 8. Deploy su GitHub Pages
+      - name: Configure Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist --branch=gh-pages --no-silent
+        run: npx angular-cli-ghpages --dir=dist --branch=gh-pages --no-silent --no-cache
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
