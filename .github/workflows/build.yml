@@ -32,9 +32,9 @@ jobs:
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
-      # Build del progetto Angular Universal
+      # Build del progetto Angular
       - name: Build the project
-        run: npm run build:ssr
+        run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
       # Verifica il contenuto della directory browser
       - name: List browser files after build
