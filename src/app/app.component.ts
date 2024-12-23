@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClientModule
 
 type Regali = {
   [key: string]: {
@@ -13,7 +13,7 @@ type Regali = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, HttpClientModule], // Aggiungi HttpClientModule
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

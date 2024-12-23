@@ -42,11 +42,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd dist
-          git init
-          git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
-          git checkout -b gh-pages
-          echo '' > .nojekyll
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push --force origin gh-pages
+          npx ngh --dir=dist
