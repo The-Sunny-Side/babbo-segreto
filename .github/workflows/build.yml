@@ -10,47 +10,59 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout il codice dalla branch principale
+      # 1) Checkout del codice dalla branch principale
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup di Node.js
+      # 2) Setup di Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # Installazione delle dipendenze
+      # 3) Installazione delle dipendenze
       - name: Install dependencies
         run: npm install
 
-      # Installazione di Angular CLI
+      # 4) Installazione globale di Angular CLI
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      # Creazione del file regali.json dai segreti
+      # 5) Creazione del file regali.json dai segreti
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
-      # Build del progetto Angular
+      # 6) Build del progetto Angular
       - name: Build the project
         run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
-      # Configurazione di Git
+      # 7) Configurazione di Git
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # Deploy manuale su GitHub Pages
+      # 8) Deploy manuale su GitHub Pages
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Spostiamoci nella cartella di output
           cd dist/browser
+
+          # Inizializza un nuovo repo in dist/browser
           git init
+
+          # Aggiungi il remote usando il token
           git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
+
+          # Crea (o switcha a) il branch gh-pages
           git checkout -b gh-pages
+
+          # (Opzionale ma consigliato) Disabilita Jekyll
+          echo '' > .nojekyll
+
+          # Aggiungi tutto, commit e push con --force
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push --force origin gh-pages
