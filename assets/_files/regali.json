@@ -1,18 +1,3 @@
 {
-  "simo123": {
-    "nome": "cri",
-    "foto": "assets/test.png"
-  },
-  "cricri": {
-    "nome": "davide",
-    "foto": "assets/test1.png"
-  },
-  "davidoneoneone": {
-    "nome": "simone",
-    "foto": "assets/test2.png"
-  },
-  "zizio": {
-    "nome": "alessia",
-    "foto": "assets/test3.png"
-  }
+  "data": "ewogICJzaW1vMTIzIjogewogICAgIm5vbWUiOiAiYWxlc3NpYSIsCiAgICAiZm90byI6ICJhc3NldHMvYWxlc3NpYS5wbmciCiAgfSwKICAiY3JpY3JpIjogewogICAgIm5vbWUiOiAiZGF2aWRlIiwKICAgICJmb3RvIjogImFzc2V0cy9kYXZpZGUucG5nIgogIH0sCiAgImRhdmlkb25lb25lb25lIjogewogICAgIm5vbWUiOiAiY2F0IiwKICAgICJmb3RvIjogImFzc2V0cy9jYXQucG5nIgogIH0sCiAgInppemlvIjogewogICAgIm5vbWUiOiAic2ltb25lIiwKICAgICJmb3RvIjogImFzc2V0cy9zaW1vbmUucG5nIgogIH0sCiAgInppenppYSI6IHsKICAgICJub21lIjogImNyaSIsCiAgICAiZm90byI6ICJhc3NldHMvY3JpLnBuZyIKICB9Cn0="
 }
