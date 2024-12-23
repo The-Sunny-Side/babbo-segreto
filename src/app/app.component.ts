@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClientModule
 import { decode as atob } from 'js-base64';
 
+
 type Regali = {
   [key: string]: {
     nome: string;
@@ -30,7 +31,7 @@ export class AppComponent {
   getRegali() {
     this.http.get<{ data: string }>('/assets/_files/regali.json').subscribe(
       (response) => {
-        const decodedData = JSON.parse(atob(response.data)); // Decodifica Base64
+        const decodedData = JSON.parse(atob(response.data));
         console.log(decodedData); // Usa i dati decodificati
       },
       (error) => {
