@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClientModule
 
 
 type Regali = {
@@ -14,7 +14,7 @@ type Regali = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, HttpClientModule], // Aggiungi HttpClientModule
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -22,7 +22,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   title = 'babbo_segreto';
-  regali: Regali = {}; 
+  regali: Regali = {}; // Sarà popolato dopo il caricamento del file
   to_show = "";
   img_src = "";
 
@@ -31,7 +31,7 @@ export class AppComponent {
     this.http.get<{ data: string }>('assets/_files/regali.json').subscribe(
       (response) => {
         this.regali= JSON.parse(atob(response.data));
-        console.log(this.regali);
+        console.log(this.regali); // Usa i dati decodificati
       },
       (error) => {
         console.error('Errore nel caricamento dei dati:', error);
@@ -39,27 +39,37 @@ export class AppComponent {
     );
   }
 
+  // Funzione per gestire il sorteggio
   onSubmit(e: any) {
+    // Controlla che i regali siano stati caricati
     if (Object.keys(this.regali).length === 0) {
       this.to_show = "Attendi, sto caricando la lista di regali...";
       return;
     }
 
+    // Ottieni tutte le chiavi dell'oggetto regali
     const keys = Object.keys(this.regali);
 
+    // Numero di volte che verranno mostrate immagini casuali
     const maxIterations = 10;
     let iterationCount = 0;
 
+    // Durante il "mescolamento" mostro un messaggio generico
     this.to_show = "Attendi... consulto la lista di Babbo Natale...";
 
+    // Intervallo per cambiare rapidamente l'immagine
     const interval = setInterval(() => {
+      // Prendi una chiave casuale
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
+      // Mostra l'immagine associata a quella chiave
       this.img_src = this.regali[randomKey]?.foto || "assets/not_found.png";
 
       iterationCount++;
+      // Se abbiamo raggiunto il numero prefissato di iterazioni...
       if (iterationCount >= maxIterations) {
-        clearInterval(interval);
+        clearInterval(interval); // Ferma il sorteggio
 
+        // Ora mostra l'immagine corretta se la password è valida
         if (this.regali[e]) {
           this.to_show = "Devi fare un regalo a: " + this.regali[e].nome;
           this.img_src = this.regali[e].foto;
@@ -68,10 +78,11 @@ export class AppComponent {
           this.to_show = "hai sbagliato qualcosa, se non tutto... nella vita";
         }
       }
-    }, 200);
+    }, 200); // Ogni 200 millisecondi verrà mostrata una nuova immagine casuale
   }
 
+  // Metodo chiamato al caricamento del componente
   ngOnInit() {
-    this.getRegali();
+    this.getRegali(); // Carica il file dei regali all'inizio
   }
 }
