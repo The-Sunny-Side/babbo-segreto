@@ -27,7 +27,7 @@ export class AppComponent {
 
   // Metodo per caricare il file regali.json
   getRegali() {
-    this.http.get<Regali>('/assets/_files/regali.json').subscribe(
+    this.http.get<Regali>('assets/_files/regali.json').subscribe(
       (data) => {
         this.regali = data;
       },
