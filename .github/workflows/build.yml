@@ -28,24 +28,22 @@ jobs:
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
       - name: Build the project
-        run: ng build --configuration production --output-path=dist/browser --base-href /babbo-segreto/
+        run: ng build --configuration production --output-path=dist --base-href /babbo-segreto/
 
-      - name: Debug Angular Build Output
+      - name: Debug Build Directory
         run: |
           echo "Contenuto della directory dist:"
-          ls -la dist
-          echo "Contenuto della directory dist/browser:"
-          ls -la dist/browser || echo "Directory dist/browser non trovata."
+          ls -R dist
 
       - name: Fix relative paths in index.html
         run: |
-          if [ -f dist/browser/index.html ]; then
-            echo "Found index.html. Fixing paths..."
-            sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/browser/index.html
-            sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/browser/index.html
+          if [ -f dist/index.html ]; then
+            echo "Found index.html in dist. Fixing paths..."
+            sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/index.html
+            sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/index.html
           else
-            echo "Error: index.html not found in dist/browser."
-            ls -la dist/browser
+            echo "Error: index.html not found in dist."
+            ls -la dist
             exit 1
           fi
 
@@ -58,7 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd dist/browser
+          cd dist
           git init
           git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
           git checkout -b gh-pages
