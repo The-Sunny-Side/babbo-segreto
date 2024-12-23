@@ -34,7 +34,7 @@ jobs:
 
       # Build del progetto Angular
       - name: Build the project
-        run: ng build --output-path=dist --base-href /babbo-segreto/
+        run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
       # Configurazione di Git
       - name: Configure Git
@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd dist
+          cd dist/browser
           git init
           git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
           git checkout -b gh-pages
