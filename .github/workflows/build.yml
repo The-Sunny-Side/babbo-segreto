@@ -14,11 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup di Node.js
+      # Setup di Node.js (specificando la versione 18)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
 
       # Installazione delle dipendenze
       - name: Install dependencies
