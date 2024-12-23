@@ -36,10 +36,6 @@ jobs:
       - name: Build the project
         run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
-      # Verifica il contenuto della directory browser
-      - name: List browser files after build
-        run: ls -la dist/browser
-
       # Configurazione di Git
       - name: Configure Git
         run: |
