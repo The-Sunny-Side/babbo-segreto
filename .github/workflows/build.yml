@@ -48,10 +48,12 @@ jobs:
 
       # Deploy manuale su GitHub Pages
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd dist/browser
           git init
-          git remote add origin https://github.com/The-Sunny-Side/babbo-segreto.git
+          git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/The-Sunny-Side/babbo-segreto.git
           git checkout -b gh-pages
           git add .
           git commit -m "Deploy to GitHub Pages"
