@@ -40,8 +40,6 @@ jobs:
       - name: List browser files after build
         run: ls -la dist/browser
 
-      # Deploy manuale su GitHub Pages con log
+      # Deploy automatico su GitHub Pages
       - name: Deploy to GitHub Pages
-        run: |
-          echo "Deploying to GitHub Pages..."
-          npx angular-cli-ghpages --dir=dist/browser --verbose
+        run: npx angular-cli-ghpages --dir=dist/browser
