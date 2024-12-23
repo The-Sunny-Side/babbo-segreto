@@ -24,28 +24,14 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
+      - name: Install ghpages
+        run: npm install -g angular-cli-ghpages
+
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
       - name: Build the project
         run: ng build --configuration production --base-href https://The-Sunny-Side/babbo-segreto/
-
-      - name: Debug Build Directory
-        run: |
-          echo "Contenuto della directory dist:"
-          ls -R dist
-
-      - name: Fix relative paths in index.html
-        run: |
-          if [ -f dist/index.html ]; then
-            echo "Found index.html in dist. Fixing paths..."
-            sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/index.html
-            sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/index.html
-          else
-            echo "Error: index.html not found in dist."
-            ls -la dist
-            exit 1
-          fi
 
       - name: Configure Git
         run: |
