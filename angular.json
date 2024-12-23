@@ -63,10 +63,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "babbo_segreto:build:production"
+              "buildTarget": "babbo_segreto:build:production"
             },
             "development": {
-              "browserTarget": "babbo_segreto:build:development"
+              "buildTarget": "babbo_segreto:build:development"
             }
           },
           "defaultConfiguration": "development"
