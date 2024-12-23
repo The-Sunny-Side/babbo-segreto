@@ -28,12 +28,14 @@ jobs:
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
       - name: Build the project
-        run: ng build --output-path=dist/browser --base-href /babbo-segreto/
+        run: ng build --configuration production --output-path=dist/browser --base-href /babbo-segreto/
 
-      - name: Debug Build Directory
+      - name: Debug Angular Build Output
         run: |
-          echo "Contents of dist/browser:"
-          ls -la dist/browser
+          echo "Contenuto della directory dist:"
+          ls -la dist
+          echo "Contenuto della directory dist/browser:"
+          ls -la dist/browser || echo "Directory dist/browser non trovata."
 
       - name: Fix relative paths in index.html
         run: |
