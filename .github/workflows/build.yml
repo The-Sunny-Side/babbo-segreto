@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup di Node.js (specificando la versione 18)
+      # Setup di Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -32,9 +32,17 @@ jobs:
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
+      # Verifica il contenuto della directory prima della build
+      - name: List files before build
+        run: ls -la
+
       # Build del progetto Angular con il base-href corretto
       - name: Build the project
         run: ng build --output-path=dist --base-href /babbo-segreto/
+
+      # Verifica il contenuto della directory dist
+      - name: List dist files after build
+        run: ls -la dist
 
       # Deploy automatico su GitHub Pages
       - name: Deploy to GitHub Pages
