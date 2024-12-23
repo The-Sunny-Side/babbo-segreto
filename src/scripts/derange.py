@@ -1,10 +1,10 @@
 import random
 import json
+import base64
 
 # Liste di password e nomi
-password = ["simo123", "cricri", "davidoneoneone", "zizio","zizzia"]
-nomi = ["simone", "cri", "davide", "cat","alessia"]
-
+password = ["simo123", "cricri", "davidoneoneone", "zizio", "zizzia"]
+nomi = ["simone", "cri", "davide", "cat", "alessia"]
 
 # Funzione per garantire un derangement (nessuno riceve la propria password)
 def derange(nomi):
@@ -41,5 +41,14 @@ for i in range(len(password)):
 # Converti il dizionario in formato JSON
 json_output = json.dumps(regali, indent=2)
 
-# Mostra il JSON generato
-print(json_output)
+# Codifica il JSON in Base64
+json_base64 = base64.b64encode(json_output.encode("utf-8")).decode("utf-8")
+
+# Crea il JSON codificato come output
+final_output = {
+    "data": json_base64
+}
+
+# Converti il risultato in JSON e stampa
+encoded_json_output = json.dumps(final_output, indent=2)
+print(encoded_json_output)

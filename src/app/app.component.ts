@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClientModule
+import { decode as atob } from 'js-base64';
 
 type Regali = {
   [key: string]: {
@@ -27,13 +28,13 @@ export class AppComponent {
 
   // Metodo per caricare il file regali.json
   getRegali() {
-    this.http.get<Regali>('assets/_files/regali.json').subscribe(
-      (data) => {
-        this.regali = data;
+    this.http.get<{ data: string }>('/assets/_files/regali.json').subscribe(
+      (response) => {
+        const decodedData = JSON.parse(atob(response.data)); // Decodifica Base64
+        console.log(decodedData); // Usa i dati decodificati
       },
       (error) => {
-        console.error('Errore durante il caricamento del file regali.json:', error);
-        this.to_show = 'Errore nel caricamento dei regali. Controlla la connessione.';
+        console.error('Errore nel caricamento dei dati:', error);
       }
     );
   }
