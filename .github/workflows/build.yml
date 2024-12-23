@@ -34,7 +34,7 @@ jobs:
 
       # Build del progetto Angular
       - name: Build the project
-        run: ng build --output-path=dist/browser --base-href /babbo-segreto/
+        run: ng build --output-path=dist --base-href /babbo-segreto/
 
       # Configurazione di Git
       - name: Configure Git
