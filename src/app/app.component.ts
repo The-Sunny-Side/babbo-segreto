@@ -30,8 +30,8 @@ export class AppComponent {
   getRegali() {
     this.http.get<{ data: string }>('assets/_files/regali.json').subscribe(
       (response) => {
-        const decodedData = JSON.parse(atob(response.data));
-        console.log(decodedData); // Usa i dati decodificati
+        this.regali= JSON.parse(atob(response.data));
+        console.log(this.regali); // Usa i dati decodificati
       },
       (error) => {
         console.error('Errore nel caricamento dei dati:', error);
