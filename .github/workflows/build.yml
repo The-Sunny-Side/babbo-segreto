@@ -28,7 +28,7 @@ jobs:
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
       - name: Build the project
-        run: ng build --configuration production --base-href "https://The-Sunny-Side/babbo-segreto/
+        run: ng build --configuration production --base-href https://The-Sunny-Side/babbo-segreto/
 
       - name: Debug Build Directory
         run: |
