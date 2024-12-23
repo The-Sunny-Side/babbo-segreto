@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout il codice dalla branch principale
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup di Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Installazione delle dipendenze
+      - name: Install dependencies
+        run: npm install
+
+      # Creazione del file regali.json dai segreti
+      - name: Create regali.json file
+        run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
+
+      # Build del progetto Angular con il base-href corretto
+      - name: Build the project
+        run: ng build --output-path=dist --base-href /babbo-segreto/
+
+      # Deploy automatico su GitHub Pages
+      - name: Deploy to GitHub Pages
+        run: npx angular-cli-ghpages --dir=dist

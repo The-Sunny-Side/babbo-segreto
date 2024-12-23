@@ -10,7 +10,9 @@
 }
 
 
-
+img[src=""] {
+    display: none;
+}
 p {
     font-weight: bolder;
 }
