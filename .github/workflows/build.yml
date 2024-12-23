@@ -40,6 +40,13 @@ jobs:
       - name: List browser files after build
         run: ls -la dist/browser
 
-      # Deploy automatico su GitHub Pages
+      # Deploy manuale su GitHub Pages
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/browser
+        run: |
+          cd dist/browser
+          git init
+          git remote add origin https://github.com/The-Sunny-Side/babbo-segreto.git
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push --force origin gh-pages
