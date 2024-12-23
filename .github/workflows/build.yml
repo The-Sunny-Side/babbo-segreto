@@ -32,18 +32,14 @@ jobs:
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
-      # Verifica il contenuto della directory prima della build
-      - name: List files before build
-        run: ls -la
-
-      # Build del progetto Angular con il base-href corretto
+      # Build del progetto Angular Universal
       - name: Build the project
-        run: ng build --output-path=dist --base-href /babbo-segreto/
+        run: npm run build:ssr
 
-      # Verifica il contenuto della directory dist
-      - name: List dist files after build
-        run: ls -la dist
+      # Verifica il contenuto della directory browser
+      - name: List browser files after build
+        run: ls -la dist/browser
 
       # Deploy automatico su GitHub Pages
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist
+        run: npx angular-cli-ghpages --dir=dist/browser
