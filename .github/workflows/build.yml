@@ -10,45 +10,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout del codice dalla branch principale
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2) Setup di Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # 3) Installazione delle dipendenze
       - name: Install dependencies
         run: npm install
 
-      # 4) Installazione globale di Angular CLI
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      # 5) Creazione del file regali.json dai segreti
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
 
-      # 6) Build del progetto Angular
       - name: Build the project
         run: ng build --output-path=dist/browser --base-href /babbo-segreto/
 
-      # 7) Correggi i percorsi relativi (se necessario)
+      - name: Check build output
+        run: ls -R dist/browser
+
       - name: Fix relative paths in index.html
         run: |
-          sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/browser/index.html
-          sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/browser/index.html
+          if [ -f dist/browser/index.html ]; then
+            sed -i 's|href="styles-|href="/babbo-segreto/styles-|g' dist/browser/index.html
+            sed -i 's|src="main-|src="/babbo-segreto/main-|g' dist/browser/index.html
+          else
+            echo "index.html not found!"
+            exit 1
+          fi
 
-      # 8) Configurazione di Git
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # 9) Deploy manuale su GitHub Pages
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
