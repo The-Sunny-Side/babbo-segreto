@@ -24,6 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Installazione di Angular CLI
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
       # Creazione del file regali.json dai segreti
       - name: Create regali.json file
         run: echo '${{ secrets.REGALI_JSON }}' > src/app/_files/regali.json
