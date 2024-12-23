@@ -44,6 +44,6 @@ jobs:
 
       # 8. Deploy su GitHub Pages
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist --branch=gh-pages
+        run: npx angular-cli-ghpages --dir=dist --branch=gh-pages --no-silent
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
