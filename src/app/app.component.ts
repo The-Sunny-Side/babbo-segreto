@@ -28,7 +28,7 @@ export class AppComponent {
 
   // Metodo per caricare il file regali.json
   getRegali() {
-    this.http.get<{ data: string }>('/assets/_files/regali.json').subscribe(
+    this.http.get<{ data: string }>('assets/_files/regali.json').subscribe(
       (response) => {
         const decodedData = JSON.parse(atob(response.data));
         console.log(decodedData); // Usa i dati decodificati
