@@ -3,8 +3,8 @@ import json
 import base64
 
 # Liste di password e nomi
-password = ["simo123", "cricri", "davidoneoneone", "zizio", "zizzia"]
-nomi = ["simone", "cri", "davide", "cat", "alessia"]
+password = ["simo123", "cricri", "sevuoipuoibucarelalotteria", "zizio", "zizzia","tantoregalerounbuono","tssnuovoinvestimento2024","unadelletipedisopra","questavoltauseroilregalo"]
+nomi = ["simone", "cri", "davide", "cat", "alessia","zol","antorack","ilenia","peppejack"]
 
 # Funzione per garantire un derangement (nessuno riceve la propria password)
 def derange(nomi):
