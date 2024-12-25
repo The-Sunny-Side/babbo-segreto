@@ -30,7 +30,6 @@ export class AppComponent {
     this.http.get<{ data: string }>('assets/_files/xms.json').subscribe(
       (response) => {
         this.regali= JSON.parse(atob(response.data));
-        console.log(this.regali); // Usa i dati decodificati
       },
       (error) => {
         console.error('Errore nel caricamento dei dati:', error);
