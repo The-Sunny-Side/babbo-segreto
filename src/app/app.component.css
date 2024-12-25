@@ -18,4 +18,5 @@ p {
 }
 .image_size{
     width: 50%;
+    max-width: 50%;
 }
