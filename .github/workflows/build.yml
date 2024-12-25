@@ -27,10 +27,10 @@ jobs:
       - name: Install ghpages
         run: npm install -g angular-cli-ghpages
 
-      - name: Create regali.json file
+      - name: Create xms.json file
         run: |
           mkdir -p src/assets/_files
-          echo '${{ secrets.REGALI_JSON }}' > src/assets/_files/regali.json
+          echo '${{ secrets.REGALI_JSON }}' > src/assets/_files/xms.json
 
       - name: Build the project
         run: ng build --configuration production --base-href /babbo-segreto/
